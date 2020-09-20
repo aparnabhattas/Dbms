@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Deleteproduct</title>
+	<link rel="stylesheet" type="text/css" href="Mainpage.css">
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="Thumbnail">
+		<div class="jumbotron">
+	 		 <h1 class="login1">Delete Product</h1>
+ 		</div>
+	</div>
+	<form action="#" method="POST" id="DeleteProductForm">
+	<input type="hidden" name="delete_product" value="true" />
+ 		<div class="falign">
+   			<div class="form-group">
+    			<label for="instru_id">Instrument Id</label>
+   				 <input type="text" name="insid" class="form-control" id="instru_id" aria-describedby="Instrument Id" placeholder="Enter Instrument Id">
+   			</div>
+   			<div class="fbalign">
+   			<button type="submit" class="btn btn-primary subbut">Submit</button>
+   		    </div>
+   		</div>
+   	</form>
+
+   	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<script>
+$(document).ready(function(){
+	$("#DeleteProductForm").submit(function(){
+		var formdata=$("#DeleteProductForm").serialize();
+		$.ajax({
+			url:"verify.php",
+			type:"POST",
+			data:formdata,
+			success:function(response){
+				console.log(response);
+				try{
+					var resp=JSON.parse(response);
+					if(resp.code=="DELETE_PRODUCT_SUC"){
+						alert("Product Deleted successfuly");
+					}
+					else{
+						alert(resp.msg);
+					}
+				}catch(err){
+					alert(err);
+				}
+			},
+			error:function(response){
+				alert("please check your internet connection and try again");
+			}
+		});
+		return false;
+	});
+});
+</script>
+</body>
+</html>
